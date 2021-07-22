@@ -28,7 +28,25 @@ const Informations = styled.div`
 
     & p {
         padding-top: 1rem;
+        
+
+        & span {
+            font-weight: 800;
+        }
     }
+`
+
+const DetailsButton = styled.button`
+    border: 2px solid #F2B138;
+    background-color: hsl(0, 0%, 100%);
+    width: 30%;
+    padding: 7px 20px;
+	border-radius: 5px 15px;
+    padding: 0.5rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 800;
+    align-self: flex-end;
+    margin-top: -1rem;
 `
 
 export function Cocktail({ name, glass, image, mainIngredient, alcoholic }) {
@@ -39,8 +57,9 @@ export function Cocktail({ name, glass, image, mainIngredient, alcoholic }) {
                 <p><span>Main ingredient: </span>{mainIngredient}</p>
                 <p><span>Glass: </span>{glass}</p>
                 <p>{alcoholic}</p>
+                <DetailsButton>details</DetailsButton>
             </Informations>
-            <img src={image} />
+            <img src={image} alt={name} />
         </CocktailContainer>
     )
 }

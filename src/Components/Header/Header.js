@@ -10,6 +10,11 @@ const HeaderContainer = styled.div`
 
     & h1 {
         margin: 2rem 1.5rem;
+        color: #F2B138;
+
+        & span {
+            color: black;
+        }
     }
 
     & nav {
@@ -19,9 +24,7 @@ const HeaderContainer = styled.div`
         transition: max-height 0.2s linear;
         right: 0;
         top: 5rem;
-        background-color: hsl(57, 90%, 80%);
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        background-color: #F2B138;
         list-style: none;
         overflow: hidden;
     }
@@ -80,7 +83,7 @@ export function Header() {
 
     return(
         <HeaderContainer isNavVisible={isNavVisible}>
-            <h1>cocktails.</h1>
+            <h1><span>cock</span>tails.</h1>
             <Hamburger onClick={showNav} isNavVisible={isNavVisible} />
             <nav>
                 <Link to='/' onClick={() => setIsNavVisible(false)}><li>cocktails list</li></Link>

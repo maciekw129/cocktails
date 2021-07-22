@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
 import { Cocktail } from '../Cocktail/Cocktail';
+import { Loading } from '../Loading/Loading';
 
 const CocktailListContainer = styled.div`
     display: flex;
@@ -37,39 +38,61 @@ const CocktailListContainer = styled.div`
     }
 
     & h4 {
-        margin-top: 2rem;
+        margin-top: 9rem;
     }
 `;
 
 export function CocktailsList() {
 
     const [cocktails, setCocktails] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [choosenLetter, setChosenLetter] = useState('A');
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
     useEffect(() => {
-        fetchCocktails('a');
+        fetchCocktails('f=a');
     }, [])
 
     const fetchCocktails = async (str) => {
-        const data = await fetch(`https://thecocktaildb.com/api/json/v1/1/search.php?f=${str}`);
+        setIsLoading(true);
+        const data = await fetch(`https://thecocktaildb.com/api/json/v1/1/search.php?${str}`);
         const jsonData = await data.json();
         console.log(jsonData);
+        setIsLoading(false);
         setCocktails(jsonData.drinks);
+    }
+
+    const searchByWord = (event) => {
+        fetchCocktails(`s=${event.target.value}`)
+    }
+
+    const searchByLetter = (letter) => {
+        fetchCocktails(`f=${letter}`);
+        setChosenLetter(letter);
     }
 
     return(
         <CocktailListContainer>
-            <input type='text' placeholder='Search for a cocktail...'></input>
+            <input type='text' placeholder='Search for a cocktail...' onChange={searchByWord}></input>
             <ul>
                 {alphabet.map((letter, index) => 
-                    <li key={index} onClick={() => fetchCocktails(letter)}>{letter}</li>
+                    <li key={index} onClick={() => searchByLetter(letter)}>{letter}</li>
                 )}
             </ul>
-            {cocktails ?
+            {isLoading ?
+            <Loading />
+            : cocktails ?
                 cocktails.map((cocktail, index) => 
-                    <Cocktail key={index} name={cocktail.strDrink} glass={cocktail.strGlass} image={cocktail.strDrinkThumb} mainIngredient={cocktail.strIngredient1} alcoholic={cocktail.strAlcoholic}  />
+                    <Cocktail
+                     key={index} 
+                     name={cocktail.strDrink} 
+                     glass={cocktail.strGlass} 
+                     image={cocktail.strDrinkThumb} 
+                     mainIngredient={cocktail.strIngredient1} 
+                     alcoholic={cocktail.strAlcoholic}  
+                     />
                 )
-            : <h4>Sorry, We haven't found any cocktail.</h4>
+            : <h4>Sorry! We haven't found any cocktail.</h4>
             }
         </CocktailListContainer>
     )
