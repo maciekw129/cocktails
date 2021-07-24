@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CocktailContainer = styled.div`
     display: flex;
@@ -41,15 +42,27 @@ const DetailsButton = styled.button`
     background-color: hsl(0, 0%, 100%);
     width: 30%;
     padding: 7px 20px;
-	border-radius: 5px 15px;
+    border-radius: 5px 15px;
     padding: 0.5rem;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 800;
     align-self: flex-end;
     margin-top: -1rem;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+    
+    & a {
+        text-decoration: none;
+        color: black;
+    }
+
+    &:hover {
+        background-color: #F2B138;
+        transition: background-color 0.2s linear;
+    }
 `
 
-export function Cocktail({ name, glass, image, mainIngredient, alcoholic }) {
+export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id }) {
     return(
         <CocktailContainer>
             <Informations>
@@ -57,7 +70,7 @@ export function Cocktail({ name, glass, image, mainIngredient, alcoholic }) {
                 <p><span>Main ingredient: </span>{mainIngredient}</p>
                 <p><span>Glass: </span>{glass}</p>
                 <p>{alcoholic}</p>
-                <DetailsButton>details</DetailsButton>
+                <DetailsButton><Link to={`/${id}`}>details</Link></DetailsButton>
             </Informations>
             <img src={image} alt={name} />
         </CocktailContainer>

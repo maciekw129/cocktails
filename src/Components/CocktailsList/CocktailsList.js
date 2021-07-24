@@ -39,36 +39,58 @@ const CocktailListContainer = styled.div`
 
     & h4 {
         margin-top: 9rem;
+        text-align: center;
+        padding: 0 1rem;
     }
 `;
 
 export function CocktailsList() {
 
     const [cocktails, setCocktails] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [choosenLetter, setChosenLetter] = useState('A');
+    const [loadingStatus, setLoadingStatus] = useState(true);
+    const [previousLetter, setPreviousLetter] = useState(undefined);
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
     useEffect(() => {
         fetchCocktails('f=a');
+        const firstLetter = document.querySelectorAll('ul > li')[0];
+        firstLetter.style.backgroundColor = "#F2B138";
+        setPreviousLetter(firstLetter);
     }, [])
 
     const fetchCocktails = async (str) => {
-        setIsLoading(true);
-        const data = await fetch(`https://thecocktaildb.com/api/json/v1/1/search.php?${str}`);
-        const jsonData = await data.json();
-        console.log(jsonData);
-        setIsLoading(false);
-        setCocktails(jsonData.drinks);
-    }
+        setLoadingStatus('loading');
+        try {
+            const data = await fetch(`https://thecocktaildb.com/api/json/v1/1/search.php?${str}`);
+                if(data.ok){
+                    const jsonData = await data.json();
+                    console.log(jsonData);
+                    setLoadingStatus('success');
+                    setCocktails(jsonData.drinks);
+                }
+            } catch(error) {
+                console.log(error);
+                setLoadingStatus('failed');
+                setCocktails(null);
+            }
+        }
+        
 
     const searchByWord = (event) => {
         fetchCocktails(`s=${event.target.value}`)
     }
 
-    const searchByLetter = (letter) => {
+    const searchByLetter = (event) => {
+        if(previousLetter === event.target) {
+            return;
+        }
+
+        const letter = event.target.getAttribute('value');
+
         fetchCocktails(`f=${letter}`);
-        setChosenLetter(letter);
+        event.target.style.backgroundColor = '#F2B138';
+        previousLetter.style.backgroundColor = 'hsl(0, 0%, 97%)';
+        setPreviousLetter(event.target);
     }
 
     return(
@@ -76,23 +98,26 @@ export function CocktailsList() {
             <input type='text' placeholder='Search for a cocktail...' onChange={searchByWord}></input>
             <ul>
                 {alphabet.map((letter, index) => 
-                    <li key={index} onClick={() => searchByLetter(letter)}>{letter}</li>
+                    <li key={index} onClick={searchByLetter} value={letter}>{letter}</li>
                 )}
             </ul>
-            {isLoading ?
+            {loadingStatus === 'loading' ?
             <Loading />
-            : cocktails ?
-                cocktails.map((cocktail, index) => 
+            : loadingStatus === 'success' ?
+                cocktails ?
+                cocktails.map((cocktail, index) =>
                     <Cocktail
                      key={index} 
                      name={cocktail.strDrink} 
                      glass={cocktail.strGlass} 
                      image={cocktail.strDrinkThumb} 
                      mainIngredient={cocktail.strIngredient1} 
-                     alcoholic={cocktail.strAlcoholic}  
+                     alcoholic={cocktail.strAlcoholic}
+                     id={cocktail.idDrink}  
                      />
                 )
-            : <h4>Sorry! We haven't found any cocktail.</h4>
+                : <h4>Sorry! We haven't found any cocktail.</h4>
+            : <h4>Something went wrong. Refresh the page and check Your internet connection.</h4>
             }
         </CocktailListContainer>
     )
