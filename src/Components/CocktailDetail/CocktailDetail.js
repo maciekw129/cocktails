@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { Button } from '../Cocktail/Cocktail'; 
 
 const CocktailDetailContainer = styled.div`
     display: flex;
@@ -7,10 +10,10 @@ const CocktailDetailContainer = styled.div`
     width: 100%;
     align-items: center;
     padding: 1rem;
-    margin-bottom: 7rem;
 
     & img {
-        width: 100%;
+        width: 90%;
+        border-radius: 5px;
     }
 `;
 
@@ -26,8 +29,19 @@ const Informations = styled.div`
 
     & p {
         margin: 0.5rem 0;
+        line-height: 1.4rem;
         
     }
+
+    & span {
+        font-weight: 800;
+    }
+`
+
+const BackButton = styled(Button)`
+    align-self: flex-start;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
 `
 
 
@@ -40,6 +54,7 @@ export function CocktailDetail({ match }) {
 
     useEffect(() => {
         fetchCocktail(id);
+        window.scrollTo(0, 0);
     }, []);
 
     const fetchCocktail = async (str) => {
@@ -69,7 +84,7 @@ export function CocktailDetail({ match }) {
             break;
         }
            const measure = data[`strMeasure${i+1}`];
-           const ingredientToPush = `${measure}of ${ingredient}`;
+           const ingredientToPush = `${ingredient} --- ${measure}`;
 
            cocktailIngredients.push(ingredientToPush);
         }
@@ -82,15 +97,17 @@ export function CocktailDetail({ match }) {
             <h4>Something went wrong</h4>
 
             : <CocktailDetailContainer>
+                <BackButton><Link to={'/'}>Back</Link></BackButton>
                 <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
                 <Informations>
                     <h1>{cocktail.strDrink}</h1>
-                    <p>Glass: {cocktail.strGlass}</p>
-                    <p>{cocktail.strAlcoholic}</p>
+                    <p><span>{cocktail.strAlcoholic}</span></p>
+                    <p><span>Glass: </span>{cocktail.strGlass}</p>
+                    <p><span>Ingredients:</span></p>
                     {ingredients.map((ingredient, index) => 
                     <p key={index}>{ingredient}</p>
                      )}
-                     <p>Preparation: {cocktail.strInstructions}</p>
+                     <p><span>Preparation:</span> {cocktail.strInstructions}</p>
                 </Informations>
             </CocktailDetailContainer>
             }

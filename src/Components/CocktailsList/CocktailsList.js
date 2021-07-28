@@ -44,18 +44,15 @@ const CocktailListContainer = styled.div`
     }
 `;
 
-export function CocktailsList() {
+export function CocktailsList({ previousLetter, changeLetter, scrollPosition, changeScrollPosition }) {
 
     const [cocktails, setCocktails] = useState([]);
     const [loadingStatus, setLoadingStatus] = useState(true);
-    const [previousLetter, setPreviousLetter] = useState(undefined);
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
     useEffect(() => {
-        fetchCocktails('f=a');
-        const firstLetter = document.querySelectorAll('ul > li')[0];
-        firstLetter.style.backgroundColor = "#F2B138";
-        setPreviousLetter(firstLetter);
+        fetchCocktails(`f=${previousLetter}`);
+        document.getElementById(previousLetter).style.backgroundColor = '#F2B138';
     }, [])
 
     const fetchCocktails = async (str) => {
@@ -73,6 +70,8 @@ export function CocktailsList() {
                 setLoadingStatus('failed');
                 setCocktails(null);
             }
+
+            window.scrollTo(0, scrollPosition);
         }
         
 
@@ -81,16 +80,14 @@ export function CocktailsList() {
     }
 
     const searchByLetter = (event) => {
-        if(previousLetter === event.target) {
+        if(previousLetter === event.target.getAttribute('value')) {
             return;
         }
-
         const letter = event.target.getAttribute('value');
-
+        changeLetter(letter)
         fetchCocktails(`f=${letter}`);
         event.target.style.backgroundColor = '#F2B138';
-        previousLetter.style.backgroundColor = 'hsl(0, 0%, 97%)';
-        setPreviousLetter(event.target);
+        document.getElementById(previousLetter).style.backgroundColor = 'hsl(0, 0%, 97%)';
     }
 
     return(
@@ -98,7 +95,7 @@ export function CocktailsList() {
             <input type='text' placeholder='Search for a cocktail...' onChange={searchByWord}></input>
             <ul>
                 {alphabet.map((letter, index) => 
-                    <li key={index} onClick={searchByLetter} value={letter}>{letter}</li>
+                    <li key={index} onClick={searchByLetter} value={letter} id={letter}>{letter}</li>
                 )}
             </ul>
             {loadingStatus === 'loading' ?
@@ -113,7 +110,8 @@ export function CocktailsList() {
                      image={cocktail.strDrinkThumb} 
                      mainIngredient={cocktail.strIngredient1} 
                      alcoholic={cocktail.strAlcoholic}
-                     id={cocktail.idDrink}  
+                     id={cocktail.idDrink}
+                     changeScrollPositon={changeScrollPosition}  
                      />
                 )
                 : <h4>Sorry! We haven't found any cocktail.</h4>

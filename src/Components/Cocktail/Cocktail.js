@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const CocktailContainer = styled.div`
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -37,7 +38,7 @@ const Informations = styled.div`
     }
 `
 
-const DetailsButton = styled.button`
+export const Button = styled.button`
     border: 2px solid #F2B138;
     background-color: hsl(0, 0%, 100%);
     width: 30%;
@@ -46,8 +47,6 @@ const DetailsButton = styled.button`
     padding: 0.5rem;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 800;
-    align-self: flex-end;
-    margin-top: -1rem;
     cursor: pointer;
     transition: background-color 0.2s linear;
     
@@ -60,9 +59,15 @@ const DetailsButton = styled.button`
         background-color: #F2B138;
         transition: background-color 0.2s linear;
     }
+`;
+
+const DetailsButton = styled(Button)`
+    align-self: flex-end;
+    margin-top: -1rem;
 `
 
-export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id }) {
+export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id, changeScrollPosition }) {
+
     return(
         <CocktailContainer>
             <Informations>
@@ -70,7 +75,7 @@ export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id }) 
                 <p><span>Main ingredient: </span>{mainIngredient}</p>
                 <p><span>Glass: </span>{glass}</p>
                 <p>{alcoholic}</p>
-                <DetailsButton><Link to={`/${id}`}>details</Link></DetailsButton>
+                <DetailsButton onClick = {() => console.log(window.scrollTop)}><Link to={`/${id}`}>details</Link></DetailsButton>
             </Informations>
             <img src={image} alt={name} />
         </CocktailContainer>
