@@ -1,7 +1,9 @@
 # Cocktails App
+## About
 Simple app, that lists many cocktails. I've made it on purpose of practising React and React Router.
 App isn't completed yet.
- 
+In this project, I'm using REST API from this site: https://www.thecocktaildb.com/api.php
+
 ## Technologies:
 * HTML
 * CSS
