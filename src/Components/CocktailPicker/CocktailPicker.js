@@ -1,5 +1,5 @@
 
-export function RandomCocktail() {
+export function CocktailPicker() {
     return(
         <div>
             <h1>THIS FEATURE IS NOT READY YET</h1>

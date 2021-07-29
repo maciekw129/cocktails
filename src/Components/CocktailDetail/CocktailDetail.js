@@ -54,7 +54,6 @@ export function CocktailDetail({ match }) {
 
     useEffect(() => {
         fetchCocktail(id);
-        window.scrollTo(0, 0);
     }, []);
 
     const fetchCocktail = async (str) => {

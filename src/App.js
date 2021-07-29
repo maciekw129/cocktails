@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Header } from './Components/Header/Header';
 import { CocktailsList } from './Components/CocktailsList/CocktailsList';
-import { RandomCocktail } from './Components/RandomCocktail/RandomCocktail';
+import { CocktailPicker } from './Components/CocktailPicker/CocktailPicker';
 import { CocktailDetail } from './Components/CocktailDetail/CocktailDetail';
 
 function App() {
@@ -34,7 +34,9 @@ function App() {
               changeScrollPosition={changeScrollPosition}
             />
           </Route>
-          <Route path='/random-cocktail' component={RandomCocktail} />
+          <Route path='/random-cocktail'>
+            <CocktailPicker/>
+          </Route>
           <Route path='/:id' component={CocktailDetail} />
         </Switch>
       </div>

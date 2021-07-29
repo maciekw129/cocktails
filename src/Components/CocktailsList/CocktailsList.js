@@ -51,11 +51,11 @@ export function CocktailsList({ previousLetter, changeLetter, scrollPosition, ch
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
     useEffect(() => {
-        fetchCocktails(`f=${previousLetter}`);
+        fetchCocktails(`f=${previousLetter}`, true);
         document.getElementById(previousLetter).style.backgroundColor = '#F2B138';
     }, [])
 
-    const fetchCocktails = async (str) => {
+    const fetchCocktails = async (str, initialFetch) => {
         setLoadingStatus('loading');
         try {
             const data = await fetch(`https://thecocktaildb.com/api/json/v1/1/search.php?${str}`);
@@ -70,8 +70,9 @@ export function CocktailsList({ previousLetter, changeLetter, scrollPosition, ch
                 setLoadingStatus('failed');
                 setCocktails(null);
             }
-
-            window.scrollTo(0, scrollPosition);
+            if(initialFetch){
+                window.scrollTo(0, scrollPosition);
+            }
         }
         
 
@@ -111,7 +112,7 @@ export function CocktailsList({ previousLetter, changeLetter, scrollPosition, ch
                      mainIngredient={cocktail.strIngredient1} 
                      alcoholic={cocktail.strAlcoholic}
                      id={cocktail.idDrink}
-                     changeScrollPositon={changeScrollPosition}  
+                     changeScrollPosition={changeScrollPosition}  
                      />
                 )
                 : <h4>Sorry! We haven't found any cocktail.</h4>

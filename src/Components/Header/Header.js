@@ -87,7 +87,7 @@ export function Header() {
             <Hamburger onClick={showNav} isNavVisible={isNavVisible} />
             <nav>
                 <Link to='/' onClick={() => setIsNavVisible(false)}><li>cocktails list</li></Link>
-                <Link to='/random-cocktail' onClick={() => setIsNavVisible(false)}><li>random cocktail</li></Link>
+                <Link to='/random-cocktail' onClick={() => setIsNavVisible(false)}><li>cocktail picker</li></Link>
                 <li>about author</li>
             </nav>
         </HeaderContainer>

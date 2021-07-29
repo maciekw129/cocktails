@@ -75,7 +75,7 @@ export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id, ch
                 <p><span>Main ingredient: </span>{mainIngredient}</p>
                 <p><span>Glass: </span>{glass}</p>
                 <p>{alcoholic}</p>
-                <DetailsButton onClick = {() => console.log(window.scrollTop)}><Link to={`/${id}`}>details</Link></DetailsButton>
+                <DetailsButton onClick={() => changeScrollPosition(window.scrollY)}><Link to={`/${id}`}>details</Link></DetailsButton>
             </Informations>
             <img src={image} alt={name} />
         </CocktailContainer>
