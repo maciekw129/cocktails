@@ -15,6 +15,7 @@ const CocktailListContainer = styled.div`
     align-items: center;
     width: 100%;
     padding: 0 1.5rem;
+    padding-bottom: 1.5rem;
 
     & input {
         padding: 1rem 2rem;
