@@ -34,7 +34,7 @@ function App() {
               changeScrollPosition={changeScrollPosition}
             />
           </Route>
-          <Route path='/random-cocktail'>
+          <Route path='/cocktail-picker'>
             <CocktailPicker/>
           </Route>
           <Route path='/:id' component={CocktailDetail} />

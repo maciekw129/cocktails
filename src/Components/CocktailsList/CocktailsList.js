@@ -1,21 +1,38 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
+import searchIcon from './searchIcon.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 import { Cocktail } from '../Cocktail/Cocktail';
 import { Loading } from '../Loading/Loading';
 
 const CocktailListContainer = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding: 0 1.5rem;
 
     & input {
-        padding: 1rem;
+        padding: 1rem 2rem;
         border: none;
+        width: 100%;
         border-radius: 10px;
-        width: 80%;
+        height: 3.25rem;
+        margin: 0 2rem;
         margin-top: 1rem;
+        padding-left: 3.125rem;
+    }
+
+    & .icon {
+        position: absolute;
+        height: 1rem;
+        left: 2.625rem;
+        top: 2.125rem;
+        color: lightgray;
     }
 
     & ul {
@@ -24,7 +41,7 @@ const CocktailListContainer = styled.div`
         flex-wrap: wrap;
         justify-content: flex-start;
         align-items: center;
-        padding: 1rem;
+        padding: 0.2rem;
         padding-bottom: 0;
         margin-top: 1rem;
         width: 100%;
@@ -94,6 +111,7 @@ export function CocktailsList({ previousLetter, changeLetter, scrollPosition, ch
     return(
         <CocktailListContainer>
             <input type='text' placeholder='Search for a cocktail...' onChange={searchByWord}></input>
+            <FontAwesomeIcon className='icon' icon={faSearch} />
             <ul>
                 {alphabet.map((letter, index) => 
                     <li key={index} onClick={searchByLetter} value={letter} id={letter}>{letter}</li>

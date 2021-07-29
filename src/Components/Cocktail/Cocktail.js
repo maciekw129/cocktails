@@ -6,7 +6,7 @@ const CocktailContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
     margin-top: 3rem;
     background-color: white;
     border-radius: 5px;
@@ -36,24 +36,22 @@ const Informations = styled.div`
             font-weight: 800;
         }
     }
+
+    & a {
+        align-self: flex-end;
+    }
 `
 
 export const Button = styled.button`
     border: 2px solid #F2B138;
     background-color: hsl(0, 0%, 100%);
-    width: 30%;
-    padding: 7px 20px;
+    width: 100%;
     border-radius: 5px 15px;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 800;
     cursor: pointer;
     transition: background-color 0.2s linear;
-    
-    & a {
-        text-decoration: none;
-        color: black;
-    }
 
     &:hover {
         background-color: #F2B138;
@@ -75,7 +73,7 @@ export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id, ch
                 <p><span>Main ingredient: </span>{mainIngredient}</p>
                 <p><span>Glass: </span>{glass}</p>
                 <p>{alcoholic}</p>
-                <DetailsButton onClick={() => changeScrollPosition(window.scrollY)}><Link to={`/${id}`}>details</Link></DetailsButton>
+                <Link to={`/${id}`}><DetailsButton onClick={() => changeScrollPosition(window.scrollY)}>details</DetailsButton></Link>
             </Informations>
             <img src={image} alt={name} />
         </CocktailContainer>

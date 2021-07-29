@@ -15,6 +15,10 @@ const CocktailDetailContainer = styled.div`
         width: 90%;
         border-radius: 5px;
     }
+
+    & a {
+        align-self: flex-start;
+    }
 `;
 
 const Informations = styled.div`
@@ -96,7 +100,7 @@ export function CocktailDetail({ match }) {
             <h4>Something went wrong</h4>
 
             : <CocktailDetailContainer>
-                <BackButton><Link to={'/'}>Back</Link></BackButton>
+                <Link to={'/'}><BackButton>Back</BackButton></Link>
                 <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
                 <Informations>
                     <h1>{cocktail.strDrink}</h1>
