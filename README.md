@@ -11,8 +11,4 @@ In this project, I'm using REST API from this site: https://www.thecocktaildb.co
 * React, Styled Components, React Router
 
 ## Setup:
-App is published live on: https://focused-bohr-ef55c5.netlify.app/
-
-
-
-
+App is published live on: https://cocktails-app-maciekw129.netlify.app/
