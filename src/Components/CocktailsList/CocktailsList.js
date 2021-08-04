@@ -16,6 +16,7 @@ const CocktailListContainer = styled.div`
     width: 100%;
     padding: 0 1.5rem;
     padding-bottom: 1.5rem;
+    top: 7rem;
 
     & input {
         padding: 1rem 2rem;
@@ -52,7 +53,9 @@ const CocktailListContainer = styled.div`
         width: 10%;
         padding: 0.5rem;
         text-align: center;
-        border: 1px solid lightgray;
+        //border: 1px solid lightgray;
+        box-shadow: 0px 0px 0.5rem lightgray;
+        background-color: white;
     }
 
     & h4 {

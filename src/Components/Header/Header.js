@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    position: relative;
+    position: fixed;
+    z-index: 98;
+    background-color: hsl(0, 0%, 97%);
+    box-shadow: 0px 0.1rem 0.3rem lightgray;
 
     & h1 {
         margin: 2rem 1.5rem;
@@ -27,12 +29,18 @@ const HeaderContainer = styled.div`
         background-color: #F2B138;
         list-style: none;
         overflow: hidden;
+        z-index: 99;
+
+        & a {
+            text-decoration: none;
+        }
     }
 
     & li {
-        padding: 0.5rem 0;
+        padding: 0.75rem 0;
         width: 100%;
         text-align: center;
+        color: black;
     }
 `
 
@@ -69,26 +77,15 @@ const Hamburger = styled.button`
     }
 `
 
-export function Header() {
-
-    const [isNavVisible, setIsNavVisible] = useState(false);
-
-    const showNav = () => {
-        if(isNavVisible) {
-            setIsNavVisible(false);
-        } else {
-            setIsNavVisible(true);
-        }
-    }
+export function Header({ isNavVisible, changeNavVisibility }) {
 
     return(
         <HeaderContainer isNavVisible={isNavVisible}>
             <h1><span>cock</span>tails.</h1>
-            <Hamburger onClick={showNav} isNavVisible={isNavVisible} />
+            <Hamburger onClick={changeNavVisibility} isNavVisible={isNavVisible} />
             <nav>
-                <Link to='/' onClick={() => setIsNavVisible(false)}><li>cocktails list</li></Link>
-                <Link to='/random-cocktail' onClick={() => setIsNavVisible(false)}><li>cocktail picker</li></Link>
-                <li>about author</li>
+                <Link to='/' onClick={changeNavVisibility}><li>cocktails list</li></Link>
+                <Link to='/cocktail-picker' onClick={changeNavVisibility}><li>cocktail picker</li></Link>
             </nav>
         </HeaderContainer>
     )

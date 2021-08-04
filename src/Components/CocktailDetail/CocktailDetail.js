@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Cocktail/Cocktail'; 
 
 const CocktailDetailContainer = styled.div`
+    position: relative;
+    top: 7rem;
     display: flex;
     flex-direction: column;
     width: 100%;
