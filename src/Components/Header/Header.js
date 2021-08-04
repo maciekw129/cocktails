@@ -77,15 +77,20 @@ const Hamburger = styled.button`
     }
 `
 
-export function Header({ isNavVisible, changeNavVisibility }) {
+export function Header({ isNavVisible, changeNavVisibility, changeScrollPosition }) {
+
+    const handleClick = () => {
+        changeScrollPosition(0);
+        changeNavVisibility();
+    }
 
     return(
         <HeaderContainer isNavVisible={isNavVisible}>
             <h1><span>cock</span>tails.</h1>
             <Hamburger onClick={changeNavVisibility} isNavVisible={isNavVisible} />
             <nav>
-                <Link to='/' onClick={changeNavVisibility}><li>cocktails list</li></Link>
-                <Link to='/cocktail-picker' onClick={changeNavVisibility}><li>cocktail picker</li></Link>
+                <Link to='/' onClick={handleClick}><li>cocktails list</li></Link>
+                <Link to='/random-cocktail' onClick={changeNavVisibility}><li>random cocktail</li></Link>
             </nav>
         </HeaderContainer>
     )

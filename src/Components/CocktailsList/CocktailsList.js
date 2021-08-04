@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
-import searchIcon from './searchIcon.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -53,7 +52,6 @@ const CocktailListContainer = styled.div`
         width: 10%;
         padding: 0.5rem;
         text-align: center;
-        //border: 1px solid lightgray;
         box-shadow: 0px 0px 0.5rem lightgray;
         background-color: white;
     }

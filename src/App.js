@@ -5,12 +5,12 @@ import styled from 'styled-components';
 
 import { Header } from './Components/Header/Header';
 import { CocktailsList } from './Components/CocktailsList/CocktailsList';
-import { CocktailPicker } from './Components/CocktailPicker/CocktailPicker';
+import { RandomCocktail } from './Components/RandomCocktail/RandomCocktail';
 import { CocktailDetail } from './Components/CocktailDetail/CocktailDetail';
 
 const Cover = styled.div`
   width: 100%;
-  height: 100%;
+  height: ${props => props.isNavVisible ? '200%' : '0%'};
   opacity: ${props => props.isNavVisible ? '50%' : '0%'};
   transition: opacity 0.2s linear;
   position: fixed;
@@ -52,9 +52,11 @@ function App() {
           isNavVisible={isNavVisible}
           changeNavVisibility={changeNavVisibility}
           hideNav={hideNav}
+          changeScrollPosition={changeScrollPosition}
         />
         <Cover 
           isNavVisible={isNavVisible}
+          onClick={changeNavVisibility}
         />
         <Switch>
           <Route path='/' exact >
@@ -65,8 +67,8 @@ function App() {
               changeScrollPosition={changeScrollPosition}
             />
           </Route>
-          <Route path='/cocktail-picker'>
-            <CocktailPicker/>
+          <Route path='/random-cocktail'>
+            <RandomCocktail />
           </Route>
           <Route path='/:id' component={CocktailDetail} />
         </Switch>
