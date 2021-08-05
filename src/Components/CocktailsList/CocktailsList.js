@@ -61,6 +61,25 @@ const CocktailListContainer = styled.div`
         text-align: center;
         padding: 0 1rem;
     }
+
+    @media only screen and (min-width: 700px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        & input {
+            width: 40%;
+            align-self: flex-start;
+        }
+
+        & ul {
+            width: 50%;
+        }
+
+        & .icon {
+            left: 4.625rem;
+        }
+    }
 `;
 
 export function CocktailsList({ previousLetter, changeLetter, scrollPosition, changeScrollPosition }) {

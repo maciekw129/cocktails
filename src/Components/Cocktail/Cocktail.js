@@ -5,7 +5,7 @@ const CocktailContainer = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     width: 90%;
     margin-top: 3rem;
     background-color: white;
@@ -15,6 +15,14 @@ const CocktailContainer = styled.div`
 
     & img {
         width: 100%;
+    }
+
+    @media only screen and (min-width: 700px) {
+        width: 30%;s
+
+        & img {
+            height: 60%;
+        }
     }
 `
 
@@ -39,6 +47,10 @@ const Informations = styled.div`
 
     & a {
         align-self: flex-end;
+    }
+
+    @media only screen and (min-width: 700px) {
+        height: 13rem;
     }
 `
 

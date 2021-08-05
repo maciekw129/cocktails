@@ -5,12 +5,10 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Cocktail/Cocktail'; 
 
 const CocktailDetailContainer = styled.div`
-    position: relative;
-    top: 7rem;
+    margin-top: 7rem;
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: center;
     padding: 1rem;
 
     & img {
@@ -20,6 +18,18 @@ const CocktailDetailContainer = styled.div`
 
     & a {
         align-self: flex-start;
+    }
+
+    @media only screen and (min-width: 950px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 10rem;
+        justify-content: space-around;
+        align-items: stretch;
+
+        & img {
+            width: 40%;
+        }
     }
 `;
 
@@ -42,12 +52,23 @@ const Informations = styled.div`
     & span {
         font-weight: 800;
     }
+
+    @media only screen and (min-width: 950px) {
+        width: 40%;
+    }
 `
 
 const BackButton = styled(Button)`
     align-self: flex-start;
     margin-left: 1rem;
     margin-bottom: 1rem;
+
+    @media only screen and (min-width: 950px) {
+        position: absolute;
+        top: 7.5rem;
+        left: 2rem;
+        width: 10%;
+    }
 `
 
 

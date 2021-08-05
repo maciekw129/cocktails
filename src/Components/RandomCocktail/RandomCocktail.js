@@ -17,6 +17,19 @@ const RandomCocktailContainer = styled.div`
     & h1 {
         text-align: center;
     }
+
+    & .buttonContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    @media only screen and (min-width: 950px) {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 6rem
+    }
 `;
 
 const RandomButton = styled.button`
@@ -41,8 +54,10 @@ export function RandomCocktail({ changeScrollPosition, randomCocktail, fetchRand
 
     return(
         <RandomCocktailContainer>
-            <h1>Pick for me a <span>random</span> cocktail!</h1>
-            <RandomButton onClick={fetchRandomCocktail}>Click Me!</RandomButton>
+            <div className="buttonContainer">
+                <h1>Click to get a <span>random</span> cocktail!</h1>
+                <RandomButton onClick={fetchRandomCocktail}>Click Me!</RandomButton>
+            </div>
             {randomCocktail ? 
             <Cocktail 
             name={randomCocktail.strDrink}

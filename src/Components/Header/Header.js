@@ -76,6 +76,10 @@ const Hamburger = styled.button`
         transform: ${props => props.isNavVisible ? 'translateY(-8px) rotate(-45deg)' : 'none'};
         transition: transform 0.2s linear;
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 export function Header({ isNavVisible, changeNavVisibility, changeScrollPosition, resetRandomCocktail }) {
