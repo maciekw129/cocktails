@@ -64,7 +64,7 @@ const DetailsButton = styled(Button)`
     margin-top: -1rem;
 `
 
-export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id, changeScrollPosition }) {
+export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id, changeScrollPosition, from }) {
 
     return(
         <CocktailContainer>
@@ -73,7 +73,10 @@ export function Cocktail({ name, glass, image, mainIngredient, alcoholic, id, ch
                 <p><span>Main ingredient: </span>{mainIngredient}</p>
                 <p><span>Glass: </span>{glass}</p>
                 <p>{alcoholic}</p>
-                <Link to={`/${id}`}><DetailsButton onClick={() => changeScrollPosition(window.scrollY)}>details</DetailsButton></Link>
+                <Link to={{
+                    pathname: `/${id}`,
+                    from: {from}
+                }}><DetailsButton onClick={() => changeScrollPosition(window.scrollY)}>details</DetailsButton></Link>
             </Informations>
             <img src={image} alt={name} />
         </CocktailContainer>

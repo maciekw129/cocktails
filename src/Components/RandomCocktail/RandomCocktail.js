@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { Cocktail } from '../Cocktail/Cocktail';
 
 const RandomCocktailContainer = styled.div`
-    position: relative;
-    top: 10rem;
+    margin-top: 8rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -21,7 +20,7 @@ const RandomCocktailContainer = styled.div`
 `;
 
 const RandomButton = styled.button`
-    margin-top: 3rem;
+    margin-top: 2rem;
     padding: 1rem 5rem;
     background: none;
     border: 2px solid #F2B138;
@@ -38,22 +37,12 @@ const RandomButton = styled.button`
     }
 `
 
-export function RandomCocktail() {
-
-    const [randomCocktail, setRandomCocktail] = useState(null);
-
-    const fetchCocktail = async () => {
-        const data = await fetch('https://thecocktaildb.com/api/json/v1/1/random.php');
-        if(data.ok) {
-            const jsonData = await data.json();
-            setRandomCocktail(jsonData.drinks[0]);
-        }
-    }
+export function RandomCocktail({ changeScrollPosition, randomCocktail, fetchRandomCocktail }) {
 
     return(
         <RandomCocktailContainer>
             <h1>Pick for me a <span>random</span> cocktail!</h1>
-            <RandomButton onClick={fetchCocktail}>Click Me!</RandomButton>
+            <RandomButton onClick={fetchRandomCocktail}>Click Me!</RandomButton>
             {randomCocktail ? 
             <Cocktail 
             name={randomCocktail.strDrink}
@@ -62,6 +51,8 @@ export function RandomCocktail() {
             mainIngredient={randomCocktail.strIngredient1}
             alcoholic={randomCocktail.strAlcoholic}
             id={randomCocktail.idDrink}
+            changeScrollPosition={changeScrollPosition}
+            from='random-cocktail'
             />
             : null
             }

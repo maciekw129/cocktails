@@ -132,7 +132,8 @@ export function CocktailsList({ previousLetter, changeLetter, scrollPosition, ch
                      mainIngredient={cocktail.strIngredient1} 
                      alcoholic={cocktail.strAlcoholic}
                      id={cocktail.idDrink}
-                     changeScrollPosition={changeScrollPosition}  
+                     changeScrollPosition={changeScrollPosition}
+                     from="cocktails-list"
                      />
                 )
                 : <h4>Sorry! We haven't found any cocktail.</h4>

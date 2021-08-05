@@ -6,6 +6,7 @@ const HeaderContainer = styled.div`
     display: flex;
     justify-content: space-between;
     position: fixed;
+    top: 0;
     z-index: 98;
     background-color: hsl(0, 0%, 97%);
     box-shadow: 0px 0.1rem 0.3rem lightgray;
@@ -77,11 +78,12 @@ const Hamburger = styled.button`
     }
 `
 
-export function Header({ isNavVisible, changeNavVisibility, changeScrollPosition }) {
+export function Header({ isNavVisible, changeNavVisibility, changeScrollPosition, resetRandomCocktail }) {
 
     const handleClick = () => {
         changeScrollPosition(0);
         changeNavVisibility();
+        resetRandomCocktail();
     }
 
     return(
@@ -90,7 +92,7 @@ export function Header({ isNavVisible, changeNavVisibility, changeScrollPosition
             <Hamburger onClick={changeNavVisibility} isNavVisible={isNavVisible} />
             <nav>
                 <Link to='/' onClick={handleClick}><li>cocktails list</li></Link>
-                <Link to='/random-cocktail' onClick={changeNavVisibility}><li>random cocktail</li></Link>
+                <Link to='/random-cocktail' onClick={handleClick}><li>random cocktail</li></Link>
             </nav>
         </HeaderContainer>
     )

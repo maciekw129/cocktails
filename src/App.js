@@ -23,6 +23,7 @@ function App() {
   const [previousLetter, setPreviousLetter] = useState('a');
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [randomCocktail, setRandomCocktail] = useState(null);
 
   const changeLetter = (letter) => {
     setPreviousLetter(letter);
@@ -44,6 +45,18 @@ function App() {
     setIsNavVisible(false);
   }
 
+  const fetchRandomCocktail = async () => {
+    const data = await fetch('https://thecocktaildb.com/api/json/v1/1/random.php');
+    if(data.ok) {
+        const jsonData = await data.json();
+        setRandomCocktail(jsonData.drinks[0]);
+    }
+  }
+
+  const resetRandomCocktail = () => {
+    setRandomCocktail(null);
+  }
+
   return (
     <Router>
       <GlobalStyle />
@@ -53,6 +66,7 @@ function App() {
           changeNavVisibility={changeNavVisibility}
           hideNav={hideNav}
           changeScrollPosition={changeScrollPosition}
+          resetRandomCocktail={resetRandomCocktail}
         />
         <Cover 
           isNavVisible={isNavVisible}
@@ -68,7 +82,11 @@ function App() {
             />
           </Route>
           <Route path='/random-cocktail'>
-            <RandomCocktail />
+            <RandomCocktail
+              changeScrollPosition={changeScrollPosition}
+              fetchRandomCocktail={fetchRandomCocktail}
+              randomCocktail={randomCocktail}
+            />
           </Route>
           <Route path='/:id' component={CocktailDetail} />
         </Switch>

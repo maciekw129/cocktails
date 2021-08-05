@@ -51,9 +51,10 @@ const BackButton = styled(Button)`
 `
 
 
-export function CocktailDetail({ match }) {
+export function CocktailDetail({ match, location }) {
 
     const id = match.params.id;
+    const from = location.from.from;
     const [cocktail, setCocktail] = useState('');
     const [loadingStatus, setLoadingStatus] = useState('');
     const [ingredients, setIngredients] = useState([]);
@@ -102,7 +103,7 @@ export function CocktailDetail({ match }) {
             <h4>Something went wrong</h4>
 
             : <CocktailDetailContainer>
-                <Link to={'/'}><BackButton>Back</BackButton></Link>
+                <Link to={from === 'cocktails-list' ? '/' : '/random-cocktail'}><BackButton>Back</BackButton></Link>
                 <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
                 <Informations>
                     <h1>{cocktail.strDrink}</h1>
